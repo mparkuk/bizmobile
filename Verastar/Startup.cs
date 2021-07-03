@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Verastar.Data;
 using VueCliMiddleware;
 
 namespace Verastar
@@ -31,6 +33,10 @@ namespace Verastar
                 configuration.RootPath = "ClientApp/dist";
             });
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+
+            services.AddDbContext<TelecomContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("VerastarDB")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +48,7 @@ namespace Verastar
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthorization();
 
@@ -52,10 +59,7 @@ namespace Verastar
 
             app.UseSpa(spa =>
             {
-                if (env.IsDevelopment())
-                    spa.Options.SourcePath = "ClientApp/";
-                else
-                    spa.Options.SourcePath = "wwwroot/ClientApp/dist";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
