@@ -28,7 +28,7 @@
 <script>
     import axios from 'axios'
     export default {
-        name: "MobileData",
+        name: "MobilePhones",
         data() {
             return {
                 mobiles: []

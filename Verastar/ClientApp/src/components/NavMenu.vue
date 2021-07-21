@@ -22,10 +22,7 @@
                             <router-link :to="{ name: 'Counter' }" class="nav-link text-dark">Counter</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'FetchData' }" class="nav-link text-dark">Fetch Data</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'MobileData' }" class="nav-link text-dark">Mobile Data</router-link>
+                            <router-link :to="{ name: 'MobilePhones' }" class="nav-link text-dark">Mobile Phones</router-link>
                         </li>
                     </ul>
                 </div>

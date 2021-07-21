@@ -1,8 +1,7 @@
 ﻿import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/components/Home.vue";
 import Counter from "@/components/Counter.vue";
-import FetchData from "@/components/FetchData.vue";
-import MobileData from "@/components/MobileData.vue";
+import MobileData from "@/components/MobilePhones.vue";
 
 const routes = [
     {
@@ -16,13 +15,8 @@ const routes = [
         component: Counter,
     },
     {
-        path: "/FetchData",
-        name: "FetchData",
-        component: FetchData,
-    },
-    {
-        path: "/MobileData",
-        name: "MobileData",
+        path: "/MobilePhones",
+        name: "MobilePhones",
         component: MobileData,
     }
 ];
