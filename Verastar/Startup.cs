@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Verastar.Data;
+using Verastar.Services;
 using VueCliMiddleware;
 
 namespace Verastar
@@ -32,11 +33,14 @@ namespace Verastar
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
             services.AddDbContext<TelecomContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VerastarDB")));
 
+            services.AddHttpClient<MobileDataApiService>();
+            services.AddScoped<IMobileService, MobileService>();
+            services.AddScoped<IMobileDataApiService, MobileDataApiService>();
+            services.AddScoped<IAddressService, AddressService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,9 +68,11 @@ namespace Verastar
                 if (env.IsDevelopment())
                 {
                     spa.UseVueCli(npmScript: "serve");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
                 }
 
             });
         }
+
     }
 }

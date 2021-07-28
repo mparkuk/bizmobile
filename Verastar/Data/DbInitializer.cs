@@ -12,10 +12,9 @@ namespace Verastar.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
             if (context.MobilePhones.Any())
             {
-                return;   // DB has been seeded
+                return;
             }
 
             var mobiles = new MobilePhone[]
@@ -24,10 +23,7 @@ namespace Verastar.Data
             new MobilePhone{Name="S21", Manufacture="Samsung", LastUpdated=DateTime.Now, ImagePath="/images/samsung-galaxy-s21-5g-r.jpg" },
             new MobilePhone{Name="iPhone 11", Manufacture="Apple", LastUpdated=DateTime.Now, ImagePath="/images/apple-iphone-11.jpg" }
             };
-            foreach (MobilePhone m in mobiles)
-            {
-                context.MobilePhones.Add(m);
-            }
+            context.MobilePhones.AddRange(mobiles);
             context.SaveChanges();
 
         }

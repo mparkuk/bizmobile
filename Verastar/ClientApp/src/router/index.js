@@ -2,6 +2,7 @@
 import Home from "@/components/Home.vue";
 import Counter from "@/components/Counter.vue";
 import MobileData from "@/components/MobilePhones.vue";
+import Order from "@/components/Order.vue";
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: "/MobilePhones",
         name: "MobilePhones",
         component: MobileData,
+    },
+    {
+        path: "/Order",
+        name: "Order",
+        component: Order,
     }
 ];
 

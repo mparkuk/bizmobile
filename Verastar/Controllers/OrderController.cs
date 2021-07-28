@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Verastar.Data;
 using Verastar.Models;
 using Verastar.Services;
 
@@ -12,13 +11,13 @@ namespace Verastar.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MobilePhoneController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly ILogger<MobilePhoneController> _logger;
         private readonly IMobileService _mobileService;
         private readonly IMobileDataApiService _mobileDataApiService;
 
-        public MobilePhoneController(ILogger<MobilePhoneController> logger, IMobileService mobileService, IMobileDataApiService mobileDataApiService)
+        public OrderController(ILogger<MobilePhoneController> logger, IMobileService mobileService, IMobileDataApiService mobileDataApiService)
         {
             _logger = logger;
             _mobileService = mobileService;
@@ -28,8 +27,7 @@ namespace Verastar.Controllers
         [HttpGet]
         public async Task<IEnumerable<MobilePhone>> GetAsync()
         {
-            //var data = await _mobileDataApiService.GetMobileInfo();
-
+            var data = await _mobileDataApiService.GetMobileInfo();
             return await _mobileService.GetMobileDataAsync();
         }
     }

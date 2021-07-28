@@ -18,7 +18,9 @@
                 <td>{{ mobile.name }}</td>
                 <td>{{ mobile.manufacture }}</td>
                 <td><img v-bind:src="mobile.imagePath" /></td>
-                <td><input type="button" value="Order now" /></td>
+                <td>
+                    <router-link :to="{ name: 'Order', query: { mobileid: mobile.id }}" class="btn">Order Now</router-link>
+                </td>
             </tr>
         </tbody>
     </table>

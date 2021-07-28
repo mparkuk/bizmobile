@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
+using Verastar.Data;
 using Verastar.Services;
 
 namespace Verastar.UnitTests.Services
@@ -7,18 +10,37 @@ namespace Verastar.UnitTests.Services
     public class MobileService_IsPrimeShould
     {
         private readonly MobileService _mobileService;
+        protected DbContextOptions<TelecomContext> ContextOptions { get; }
+        private readonly TelecomContext context;
 
         public MobileService_IsPrimeShould()
         {
-            _mobileService = new MobileService();
+            ContextOptions = new DbContextOptionsBuilder<TelecomContext>()
+                .UseInMemoryDatabase("TestDatabase")
+                .Options;
+            context = new TelecomContext(ContextOptions);
+            _mobileService = new MobileService(context);
+            Seed();
+        }
+
+        private void Seed()
+        {
+            using (var context = new TelecomContext(ContextOptions))
+            {
+
+                context.Database.EnsureDeleted();
+
+                DbInitializer.Initialize(context);
+
+            }
         }
 
         [TestMethod]
-        public void IsPrime_InputIs1_ReturnFalse()
+        public async Task CheckMobileDataIsLoaded()
         {
-            var result = _mobileService.IsPrime(1);
+            var result = await _mobileService.GetMobileDataAsync();
 
-            Assert.IsFalse(result, $"1 should not be prime");
+            Assert.IsTrue(result.Count > 0);
         }
 
         [DataTestMethod]
