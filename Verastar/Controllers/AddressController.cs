@@ -20,9 +20,19 @@ namespace Verastar.Controllers
         }
 
         [HttpGet]
-        public async Task<AddressResponse> GetAsync(string term)
+        [Route("ByTerm")]
+        public async Task<AddressResponse> GetByTermAsync(string term)
         {
             var data = await _addressService.GetAddressListAsync(term);
+
+            return data;
+        }
+
+        [HttpGet]
+        [Route("ById")]
+        public async Task<FullAddressResponseDTO> GetByIdAsync(string id)
+        {
+            var data = await _addressService.GetAddressByIdAsync(id);
 
             return data;
         }

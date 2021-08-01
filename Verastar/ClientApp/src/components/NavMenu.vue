@@ -16,13 +16,12 @@
                     <ul class="navbar-nav flex-grow">
                         <li class="nav-item">
                             <router-link :to="{ name: 'Home' }" class="nav-link text-dark">Home</router-link>
-
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'Counter' }" class="nav-link text-dark">Counter</router-link>
                         </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'MobilePhones' }" class="nav-link text-dark">Mobile Phones</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'Order' }" class="nav-link text-dark">Order</router-link>
                         </li>
                     </ul>
                 </div>

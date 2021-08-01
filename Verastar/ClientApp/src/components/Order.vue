@@ -4,102 +4,98 @@
     <p>Just a few detail and your order will be on it's way.</p>
 
     <div class="order-form my-4 mx-4">
-        <div class="container pt-4">
+        <form v-on:submit.prevent="postOrder">
+            <div class="container pt-4">
 
-            <div class="row">
-                <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
 
-                    <div class="row mx-4">
-                        <div class="col-12 mb-2">
-                            <label class="order-form-label">Company Name</label>
-                        </div>
-                        <div class="col-12 col-sm-12 mt-2 mt-sm-0">
-                            <input name="companyname" class="order-form-input" placeholder="Company name">
-                        </div>
-                    </div>
-                    <div class="row mx-4">
-                        <div class="col-12 mb-2">
-                            <label class="order-form-label">Name</label>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <input name="firstname" class="order-form-input" placeholder="First name">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 mt-sm-0">
-                            <input name="lastname" class="order-form-input" placeholder="Last">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Address</label>
-                        </div>
-                        <div class="col-12">
-                            <input name="autoaddress" class="order-form-input" placeholder="Start typing the first line of your address here">
-                        </div>
-                        <div class="col-12 mt-2">
-                            <input class="order-form-input" placeholder="Street Address">
-                        </div>
-                        <div class="col-12 mt-2">
-                            <input class="order-form-input" placeholder="Street Address Line 2">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                            <input class="order-form-input" placeholder="City">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                            <input class="order-form-input" placeholder="Region">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                            <input class="order-form-input" placeholder="Postal / Zip Code">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                            <input class="order-form-input" placeholder="Country">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="validation" id="validation" value="1">
-                                <label for="validation" class="form-check-label">Agree to terms and conditions</label>
+                        <div class="row mx-4">
+                            <div class="col-12 mb-2">
+                                <label for="companyname" class="order-form-label">Company Name</label>
+                            </div>
+                            <div class="col-12 col-sm-12 mt-2 mt-sm-0">
+                                <input id="companyname" name="companyname" v-model="order.companyname" class="order-form-input" placeholder="Company name">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button type="button" id="btnSubmit" class="btn btn-dark d-block mx-auto btn-submit">Submit</button>
+                        <div class="row mx-4">
+                            <div class="col-12 mb-2">
+                                <label class="order-form-label">Name</label>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input name="firstname" v-model="order.firstname" class="order-form-input" placeholder="First name">
+                            </div>
+                            <div class="col-12 col-sm-6 mt-2 mt-sm-0">
+                                <input name="lastname" v-model="order.lastname" class="order-form-input" placeholder="Last">
+                            </div>
                         </div>
-                    </div>
 
+                        <Address @address-updated="updateAddress"></Address>
+
+                        <div class="row mt-3 mx-4">
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" v-model="order.agreeterms" class="form-check-input" name="validation" id="validation" value="1">
+                                    <label for="validation" class="form-check-label">Agree to terms and conditions</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" id="btnSubmit" @onclick="postOrder()" class="btn btn-dark d-block mx-auto btn-submit">Submit</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 </template>
 
 <script>
     import axios from 'axios'
+    import Address from './Address.vue'
+
     export default {
         name: "MobilePhones",
+        components: {
+            Address
+        },
         data() {
             return {
+                order: {
+                    companyname: "",
+                    firstname: "",
+                    lastname: "",
+                    agreeterms: false,
+                    address: {}
+                },
                 mobiles: []
             }
         },
         methods: {
-            getMobilePhones() {
-                axios.get('/MobilePhone')
+            updateAddress(data) {
+                this.order.address = data;
+            },
+            postOrder() {
+                this.order.address = Address.address;
+
+                axios.post('/Order', this.order)
                     .then((response) => {
-                        this.mobiles = response.data;
+                        if (response == "Ok")
+                            console.log("Order complete");
+                        else
+                            console.log("Order failed");
                     })
                     .catch(function (error) {
-                        alert(error);
+                        console.log(error);
                     });
             }
         },
         mounted() {
-            this.getMobilePhones();
         }
     }
 </script>

@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Verastar.Models;
 using Verastar.Services;
 
@@ -24,11 +20,10 @@ namespace Verastar.Controllers
             _mobileDataApiService = mobileDataApiService;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<MobilePhone>> GetAsync()
+        [HttpPost]
+        public ActionResult PostAsync(Order order)
         {
-            var data = await _mobileDataApiService.GetMobileInfo();
-            return await _mobileService.GetMobileDataAsync();
+            return Ok();
         }
     }
 }

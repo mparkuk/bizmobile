@@ -3,23 +3,19 @@
         <h1>{{ msg }}</h1>
         <img src="../assets/logo.png" />
         <p>
-            Template for Vue JS 3.0 and .NET 5 applications developed by <b>Alexandre Malavasi.</b><br />
-            In order to get more content on Vue JS and .NET platform, please follow on my social media profiles:
+            Welcome to Verastar mobile ordering app, please enter your mobile number to continue:
         </p>
-        <ul>
-            <li>
-                <a href="https://medium.com/@alexandre.malavasi" target="_blank">Medium</a>
-            </li>
-            <li>
-                <a href="https://twitter.com/alemalavasi" target="_blank">Twitter</a>
-            </li>
-            <li>
-                <a href="https://www.youtube.com/channel/UC-KFGgYiot1eA8QFqIgLmqA" target="_blank">Youtube</a>
-            </li>
-            <li>
-                <a href="https://www.facebook.com/alexandre.malavasi.dev" target="_blank">Facebook</a>
-            </li>
-        </ul>
+        <div class="container pt-4">
+            <div class="form-inline justify-content-center">
+
+                <div class="form-group">
+                    <label for="mobilenumber" class="mr-2">Mobile Number:</label>
+                    <input type="text" class="form-control mr-2" id="mobilenumber" value="07712345678">
+                </div>
+                <button type="submit" class="btn btn-primary" @click="$router.push('MobilePhones')">Continue</button>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -28,7 +24,7 @@ export default {
   name: 'Home',
   props: {
     msg: String
-  }
+        }
 }
 </script>
 
