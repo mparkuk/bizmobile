@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Verastar.Core.IRepositories;
 using Verastar.Models;
 using Verastar.Services;
 
@@ -12,14 +13,14 @@ namespace Verastar.Controllers
     public class MobilePhoneController : ControllerBase
     {
         private readonly ILogger<MobilePhoneController> _logger;
-        private readonly IMobileService _mobileService;
-        private readonly IMobileDataApiService _mobileDataApiService;
+        private readonly IMobilePhoneRepository _mobilePhoneRepository;
+        //private readonly IMobileDataApiService _mobileDataApiService;
 
-        public MobilePhoneController(ILogger<MobilePhoneController> logger, IMobileService mobileService, IMobileDataApiService mobileDataApiService)
+        public MobilePhoneController(ILogger<MobilePhoneController> logger, IMobilePhoneRepository mobilePhoneRepository)
         {
             _logger = logger;
-            _mobileService = mobileService;
-            _mobileDataApiService = mobileDataApiService;
+            _mobilePhoneRepository = mobilePhoneRepository;
+            //_mobileDataApiService = mobileDataApiService;
         }
 
         [HttpGet]
@@ -27,7 +28,7 @@ namespace Verastar.Controllers
         {
             //var data = await _mobileDataApiService.GetMobileInfo();
 
-            return await _mobileService.GetMobileDataAsync();
+            return await _mobilePhoneRepository.All();
         }
     }
 }

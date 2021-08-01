@@ -9,7 +9,7 @@ namespace Verastar.Services
 {
     public interface IAddressService
     {
-        Task<AddressResponse> GetAddressListAsync(string postcode);
+        Task<AddressResponse> GetAddressListAsync(string term);
         Task<FullAddressResponseDTO> GetAddressByIdAsync(string id);
     }
 

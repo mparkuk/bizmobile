@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Verastar.Core.IConfiguration;
 using Verastar.Data;
 using Verastar.Services;
 using VueCliMiddleware;
@@ -30,10 +31,11 @@ namespace Verastar
             services.AddDbContext<TelecomContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VerastarDB")));
 
-            services.AddHttpClient<MobileDataApiService>();
-            services.AddScoped<IMobileService, MobileService>();
-            services.AddScoped<IMobileDataApiService, MobileDataApiService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAddressService, AddressService>();
+
+            services.AddHttpClient<MobileDataApiService>();
+            services.AddScoped<IMobileDataApiService, MobileDataApiService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

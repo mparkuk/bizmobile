@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using Verastar.Core.IRepositories;
 using Verastar.Models;
 using Verastar.Services;
 
@@ -9,21 +11,20 @@ namespace Verastar.Controllers
     [Route("[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly ILogger<MobilePhoneController> _logger;
-        private readonly IMobileService _mobileService;
-        private readonly IMobileDataApiService _mobileDataApiService;
+        private readonly ILogger<OrderController> _logger;
+        private readonly IOrderRepository _orderRepository;
 
-        public OrderController(ILogger<MobilePhoneController> logger, IMobileService mobileService, IMobileDataApiService mobileDataApiService)
+        public OrderController(ILogger<OrderController> logger, IOrderRepository orderRepository)
         {
             _logger = logger;
-            _mobileService = mobileService;
-            _mobileDataApiService = mobileDataApiService;
+            _orderRepository = orderRepository;
         }
 
         [HttpPost]
-        public ActionResult PostAsync(Order order)
+        public async Task<ActionResult> PostAsync(Order order)
         {
-            return Ok();
+            await _orderRepository.Add(order);
+            return Ok(order);
         }
     }
 }

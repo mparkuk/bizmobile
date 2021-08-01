@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Verastar.Models;
-using Microsoft.EntityFrameworkCore;
+using Verastar.Models.OrderAggregate;
 
 namespace Verastar.Data
 {
@@ -14,6 +11,9 @@ namespace Verastar.Data
         }
 
         public DbSet<MobilePhone> MobilePhones { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Address> OrderAddresses { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -7,7 +7,7 @@ namespace Verastar.Models
 {
     public class MobilePhone
     {
-        public int ID { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Manufacture { get; set; }
         public string ImagePath { get; set; }

@@ -7,11 +7,12 @@ namespace Verastar.Models.OrderAggregate
 {
     public class Address
     {
-        public string Line1 { get; private set; }
-        public string Line2 { get; private set; }
-        public string TownCity { get; private set; }
-        public string District { get; private set; }
-        public string PostCode { get; private set; }
+        public Guid Id { get; set; }
+        public string Line1 { get; set; }
+        public string Line2 { get; set; }
+        public string TownCity { get; set; }
+        public string District { get; set; }
+        public string PostCode { get; set; }
 
     }
 }

@@ -10,10 +10,10 @@ namespace Verastar.Controllers
     [Route("[controller]")]
     public class AddressController : ControllerBase
     {
-        private readonly ILogger<MobilePhoneController> _logger;
+        private readonly ILogger<AddressController> _logger;
         private readonly IAddressService _addressService;
 
-        public AddressController(ILogger<MobilePhoneController> logger, IAddressService addressService)
+        public AddressController(ILogger<AddressController> logger, IAddressService addressService)
         {
             _logger = logger;
             _addressService = addressService;
