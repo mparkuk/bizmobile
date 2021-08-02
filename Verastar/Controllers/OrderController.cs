@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Verastar.Core.IRepositories;
 using Verastar.Models;
-using Verastar.Services;
 
 namespace Verastar.Controllers
 {
@@ -24,6 +23,7 @@ namespace Verastar.Controllers
         public async Task<ActionResult> PostAsync(Order order)
         {
             await _orderRepository.Add(order);
+            await _orderRepository.Save();
             return Ok(order);
         }
     }

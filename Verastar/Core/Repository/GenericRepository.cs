@@ -53,5 +53,10 @@ namespace Verastar.Core.Repository
         {
             throw new NotImplementedException();
         }
+
+        public virtual Task<int> Save()
+        {
+            return context.SaveChangesAsync();
+        }
     }
 }

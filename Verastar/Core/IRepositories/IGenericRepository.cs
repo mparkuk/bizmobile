@@ -13,5 +13,6 @@ namespace Verastar.Core.IRepositories
         Task<bool> Delete(Guid id);
         Task<bool> Upsert(T entity);
         Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
+        Task<int> Save();
     }
 }
