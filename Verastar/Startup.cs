@@ -70,8 +70,8 @@ namespace Verastar
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseVueCli(npmScript: "serve");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    spa.UseVueCli(npmScript: "serve");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
                 }
 
             });
