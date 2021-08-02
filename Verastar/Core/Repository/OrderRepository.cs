@@ -12,7 +12,7 @@ namespace Verastar.Core.Repository
 {
     public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
-        public OrderRepository(TelecomContext context, ILogger logger) : base(context, logger) { }
+        public OrderRepository(TelecomContext context, ILogger<OrderRepository> logger) : base(context, logger) { }
 
         public override async Task<IEnumerable<Order>> All()
         {

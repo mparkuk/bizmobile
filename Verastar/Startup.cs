@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Verastar.Core.IRepositories;
+using Verastar.Core.Repository;
 using Verastar.Data;
 using Verastar.Services;
 using VueCliMiddleware;
@@ -21,6 +24,12 @@ namespace Verastar
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(config =>
+            {
+                config.AddDebug();
+                config.AddConsole();
+            });
+
             services.AddControllers();
             services.AddSpaStaticFiles(configuration =>
             {
@@ -30,8 +39,10 @@ namespace Verastar
             services.AddDbContext<TelecomContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VerastarDB")));
 
-            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IMobilePhoneRepository, MobilePhoneRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
+            services.AddScoped<IAddressService, AddressService>();
             services.AddHttpClient<MobileDataApiService>();
             services.AddScoped<IMobileDataApiService, MobileDataApiService>();
         }

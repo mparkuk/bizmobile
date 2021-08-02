@@ -16,9 +16,7 @@ namespace Verastar.Core.Repository
         internal DbSet<T> dbSet;
         public readonly ILogger _logger;
 
-        public GenericRepository(
-            TelecomContext context,
-            ILogger logger)
+        public GenericRepository(TelecomContext context, ILogger logger)
         {
             this.context = context;
             this.dbSet = context.Set<T>();

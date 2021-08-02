@@ -12,7 +12,7 @@ namespace Verastar.Core.Repository
 {
     public class MobilePhoneRepository : GenericRepository<MobilePhone>, IMobilePhoneRepository
     {
-        public MobilePhoneRepository(TelecomContext context, ILogger logger) : base(context, logger) { }
+        public MobilePhoneRepository(TelecomContext context, ILogger<MobilePhoneRepository> logger) : base(context, logger) { }
 
         public override async Task<IEnumerable<MobilePhone>> All()
         {
